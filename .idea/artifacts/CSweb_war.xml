@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="CSweb:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="CSweb.war">
-      <element id="artifact" artifact-name="CSweb:war exploded" />
-    </root>
-  </artifact>
-</component>
