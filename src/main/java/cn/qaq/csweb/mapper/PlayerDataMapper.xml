@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qaq.csweb.mapper.PlayerDataMapper">
+  <resultMap id="BaseResultMap" type="cn.qaq.csweb.pojo.PlayerData">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <id column="steam_id" jdbcType="VARCHAR" property="steamId" />
+    <result column="player_id" jdbcType="VARCHAR" property="playerId" />
+    <result column="VIP" jdbcType="INTEGER" property="vip" />
+    <result column="VIPTL" jdbcType="INTEGER" property="viptl" />
+    <result column="VIPYEAR" jdbcType="INTEGER" property="vipyear" />
+    <result column="killplayer" jdbcType="INTEGER" property="killplayer" />
+    <result column="deadplayer" jdbcType="INTEGER" property="deadplayer" />
+    <result column="assistplayer" jdbcType="INTEGER" property="assistplayer" />
+    <result column="currentpoints" jdbcType="INTEGER" property="currentpoints" />
+    <result column="allpoints" jdbcType="INTEGER" property="allpoints" />
+    <result column="chenghao" jdbcType="INTEGER" property="chenghao" />
+    <result column="chenghaoname" jdbcType="VARCHAR" property="chenghaoname" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+  </resultMap>
+  <select id="selectBySteamID" resultMap="BaseResultMap">
+    select * from player_data where steam_id=#{steamId}  LIMIT 1
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select * from player_data where player_id LIKE CONCAT('%',#{name},'%')
+    <if test="order!=null">
+      order by  ${order}
+    </if>
+    <if test="desc!=null and order!=null">
+      ${desc}
+    </if>
+    <choose>
+      <when test="limit!=0">
+        LIMIT #{offset}, #{limit}
+      </when>
+      <otherwise>
+        LIMIT 0,50
+      </otherwise>
+    </choose>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from player_data
+    <if test="order!=null">
+      order by  ${order}
+    </if>
+    <if test="desc!=null and order!=null">
+      ${desc}
+    </if>
+    <choose>
+      <when test="limit!=0">
+        LIMIT #{offset}, #{limit}
+      </when>
+      <otherwise>
+        LIMIT 0,50
+      </otherwise>
+    </choose>
+  </select>
+  <select id="countAll" resultType="Integer">
+    select count(*) from player_data
+  </select>
+  <select id="countByName" resultType="Integer">
+    select count(*) from player_data where player_id LIKE CONCAT('%',#{name},'%')
+  </select>
+</mapper>
