@@ -122,6 +122,11 @@
                     return;
                 }
                 data=res.jsonObject;
+                if(typeof(data.steamId)=="undefined")
+                {
+                    layer.msg("没有查询到相关记录！！！", {icon: 5});
+                    return;
+                }
                 con='玩家名称:' +data.playerId+
                     '    STEAMID:' +data.steamId+
                     '<br>称号:' +data.chenghaoname+
@@ -184,8 +189,6 @@
                         return '<span style="color: #0cff18;font-weight:bold">'+d.assistplayer+'</span>';
                     }},
                 {field:'number',title: '场次', sort: true},
-                {field:'vipyear',title: 'VIP年份'},
-                {field:'viptl',title: 'VIP???'},
                 {field:'vip',title: 'VIP'}
             ]]
             ,  initSort: {

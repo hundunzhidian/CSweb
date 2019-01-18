@@ -24,7 +24,7 @@ public class PlayerController {
     @ResponseBody
     public Json getDataByName(@PathVariable("name") String name,@RequestParam(value="order" ,required =false ) String order,@RequestParam(value="desc",required =false ) String desc ,@RequestParam(value="page" ,required =false ) Integer page,@RequestParam(value="limit" ,required =false ) Integer limit)
     {
-
+        logger.debug(name);
         return service.getDataByName(name,order,desc,page,limit);
     }
     @RequestMapping(value = "/", method = RequestMethod.GET)
